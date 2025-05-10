@@ -1,35 +1,34 @@
 package com.wellsfargo.controller;
 
+import com.wellsfargo.model.CityCoordinates;
 import com.wellsfargo.service.WeatherService;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/weather")
+@RequestMapping("/weather/v1")
 public class WeatherAppController {
 
     @Autowired
     WeatherService weatherService;
 
+    // http://localhost:8080/weather/v1/city?name=Richmond
     @GetMapping("/city")
-    public ResponseEntity<? extends  Map> getCityDetails(@RequestParam String name) {
-        // http://localhost:8080/weather/city?name=Herndon
+    public ResponseEntity<?> getCityDetails(@RequestParam String name) {
+
         return weatherService.getCityDetails(name);
+
+//        List<CityData> cityDataList = weatherService.getCityDetails(name);
+//        return ResponseEntity.of(Optional.ofNullable(cityDataList));
     }
 
-    @GetMapping("")
-    public ResponseEntity<Map<String, Object>> getTemperatures(@RequestParam List<String> cities) {
-        // Hit local api url : http://localhost:8080/weather?cities=NewYork,LosAngeles
-        return weatherService.getTemperatures(cities);
+    // http://localhost:8080/weather/v1/temperature
+    @PostMapping("/temperature")
+    public ResponseEntity<Map<String, Object>> getTemperatures(@RequestBody CityCoordinates coordinates) {
+        return weatherService.getTemperature(coordinates);
     }
 
 
