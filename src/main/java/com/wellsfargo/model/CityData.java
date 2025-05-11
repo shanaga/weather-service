@@ -2,6 +2,8 @@ package com.wellsfargo.model;
 
 public class CityData {
 
+    private String name;
+
     public CityData() {
 
     }
@@ -9,8 +11,6 @@ public class CityData {
     public CityData(String name) {
         this.name = name;
     }
-
-    private String name;
 
     public String getName() {
         return name;
