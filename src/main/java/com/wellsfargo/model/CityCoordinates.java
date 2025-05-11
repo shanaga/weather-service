@@ -1,8 +1,5 @@
 package com.wellsfargo.model;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-
 public class CityCoordinates {
     private String city;
     private double latitude;

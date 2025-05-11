@@ -18,11 +18,7 @@ public class WeatherAppController {
     // http://localhost:8080/weather/v1/city?name=Richmond
     @GetMapping("/city")
     public ResponseEntity<?> getCityDetails(@RequestParam String name) {
-
         return weatherService.getCityDetails(name);
-
-//        List<CityData> cityDataList = weatherService.getCityDetails(name);
-//        return ResponseEntity.of(Optional.ofNullable(cityDataList));
     }
 
     // http://localhost:8080/weather/v1/temperature
@@ -30,6 +26,5 @@ public class WeatherAppController {
     public ResponseEntity<Map<String, Object>> getTemperatures(@RequestBody CityCoordinates coordinates) {
         return weatherService.getTemperature(coordinates);
     }
-
 
 }
